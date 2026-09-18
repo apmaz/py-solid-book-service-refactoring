@@ -1,12 +1,8 @@
 import json
-import xml.etree.ElementTree as ElementTree
 from abc import ABC
+from xml.etree import ElementTree
 
-
-class Book:
-    def __init__(self, title: str, content: str) -> None:
-        self.title = title
-        self.content = content
+from app.models import Book
 
 
 class BookOutputOperation(ABC):
@@ -49,15 +45,3 @@ class XmlSerializer(BookOutputOperation):
         content = ElementTree.SubElement(root, "content")
         content.text = book.content
         return ElementTree.tostring(root, encoding="unicode")
-
-
-class GetOutputService:
-    def __init__(self, operations: dict) -> None:
-        self.operations = operations
-
-    def get_operation(self, operation: tuple[str, str]) -> BookOutputOperation:
-        service = self.operations.get(operation)
-        if service is None:
-            raise ValueError(f"Unknown {operation[0]} type: {operation[1]}")
-
-        return service

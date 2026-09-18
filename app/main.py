@@ -1,4 +1,4 @@
-from app.book import (
+from app.operations import (
     ConsoleDisplay,
     ReverseDisplay,
     ConsolPrint,
@@ -6,8 +6,9 @@ from app.book import (
     XmlSerializer,
     JsonSerializer,
     Book,
-    GetOutputService
 )
+
+from app.services import GetOutputService
 
 dict_operations = {
     ("display", "console"): ConsoleDisplay(),
